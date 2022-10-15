@@ -1,45 +1,33 @@
-/* WiFi Peer-to-Peer example, Transmitter Sketch
- * Rob Reynolds, SparkFun Electronics, November 2021
- * This example uses a pair of SparkFun ESP32 Thing Plus Wroom modules
- * (https://www.sparkfun.com/products/15663, a SparkFun Qwiic Environmental
- * Combo Breakout (https://www.sparkfun.com/products/14348), and a SparkFun
- * Qwiic 20x4 SerLCD - RGB Backlight (https://www.sparkfun.com/products/16398).
- * 
- * Feel like supporting our work? Buy a board from SparkFun!
- * https://www.sparkfun.com/
- * 
- * License: MIT. See license file for more information but you can
- * basically do whatever you want with this code.
- * 
- * Based on original code by 
- * Rui Santos
- * Complete project details at https://RandomNerdTutorials.com/esp-now-esp32-arduino-ide/
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files.
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
-*/
-
 #include <esp_now.h>
 #include <WiFi.h>
 
-  esp_now_peer_info_t peerInfo;
+//------------------------------------------------------START CLASS
+class class_message
+{
+  public:
+    int message_number;
+    float data1;
+    float data2;
+    float data3;
+    float data4;
+    float data5;
+    float data6;
+    float data7;
+    float data8;
+    float data9;
+    float data10;
+    class_message(){ message_number++;}
+  
+};
+
+long long int messages_sent = 0;
+
+//------------------------------------------------------END CLASS
+
+esp_now_peer_info_t peerInfo;
 
 // REPLACE WITH YOUR RECEIVER MAC Address
 uint8_t broadcastAddress[] = {0x24, 0x6F, 0x28, 0x7A, 0x93, 0x44};
-
-// Structure example to send data
-// Must match the receiver structure
-typedef struct struct_message {
-  float a;
-  float b;
-  float c;
-} struct_message;
-
-// Create a struct_message called myData
-struct_message myData;
 
 // callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
@@ -48,6 +36,7 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 }
 
 void setup() {
+
   Serial.begin(115200);
 
 
@@ -63,9 +52,6 @@ void setup() {
   // Once ESPNow is successfully Init, we will register for Send CB to
   // get the status of Trasnmitted packet
   esp_now_register_send_cb(OnDataSent);
-
-  // Register peer
-
   memcpy(peerInfo.peer_addr, broadcastAddress, 6);
   peerInfo.channel = 0;  
   peerInfo.encrypt = false;
@@ -79,28 +65,28 @@ void setup() {
 
 void loop() {
   // Set values to send
-  //strcpy(myData.a, "THIS IS A CHAR");
-  myData.a = 13.1;
-  myData.b = 987.321;
-  myData.c = 1;
+  class_message betterData;
+  messages_sent++;
+  betterData.message_number = messages_sent;
 
-  // Send message via ESP-NOW
-  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
+  betterData.data1 = 1000;
+  betterData.data2 = 12000;
+  betterData.data3 = 13000;
+  betterData.data4 = 14000;
+  betterData.data5 = 15000;
+  betterData.data6 = 16000;
+  betterData.data7 = 17000;
+  betterData.data8 = 18000;
+  betterData.data9 = 19000;
+  betterData.data10 = 199000;
 
-  // The following is only used for testing, to check data in Serial Monitor
-  /*
-  Serial.print("Temperature in Fahrenheit: ");
-  Serial.println(myData.a);
-  Serial.print("Humidity: ");
-  Serial.println(myData.b);
-  Serial.print("Pressure: ");
-  Serial.println(myData.c);
-*/
+  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &betterData, sizeof(betterData));
+
   if (result == ESP_OK) {
     Serial.println("Sent with success");
   }
   else {
     Serial.println("Error sending the data");
   }
-  delay(2000); // Send data every two seconds
+  //delay(2000); // Send data every two seconds
 }

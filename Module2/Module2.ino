@@ -22,22 +22,37 @@
  * copies or substantial portions of the Software.
 */
 
-#include <esp_now.h>
+#include "esp_now.h"
 #include <WiFi.h>
 
+//------------------------------------------------------START CLASS
+class class_message
+{
+  public:
+    static int message_number;
+    float data1;
+    float data2;
+    float data3;
+    float data4;
+    float data5;
+    float data6;
+    float data7;
+    float data8;
+    float data9;
+    float data10;
+    class_message(){ message_number++;}
+  
+};
+int class_message::message_number = 0;
 
-// Structure example to receive data
-// Must match the sender structure
-typedef struct struct_message {
-    float a;
-    float b;
-    float c;
-    float d;
-} struct_message;
+//------------------------------------------------------END CLASS
+
+
+
+
 
 // Create a struct_message called myData
-struct_message myData;
-
+class_message betterData;
 
 
 void setup() {
@@ -68,6 +83,7 @@ void loop() {
 
 
 
+/*
 // callback function that will be executed when data is received
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   memcpy(&myData, incomingData, sizeof(myData));
@@ -79,6 +95,44 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   Serial.println(myData.b);
   Serial.print("Pressure: ");
   Serial.println(myData.c);
+  Serial.println();
+
+}
+*/
+
+// callback function that will be executed when data is received
+void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
+  memcpy(&betterData, incomingData, sizeof(betterData));
+
+  // Use this for testing in Serial Monitor if you're not seeing anything on the LCD display 
+  
+  Serial.print("data1: ");
+  Serial.println(betterData.data1);
+  Serial.print("data2: ");
+  Serial.println(betterData.data2);
+  Serial.print("data3: ");
+  Serial.println(betterData.data3);
+  Serial.print("data4: ");
+  Serial.println(betterData.data4);
+  Serial.print("data5: ");
+  Serial.println(betterData.data5);
+  Serial.print("data6: ");
+  Serial.println(betterData.data6);
+  Serial.print("data7: ");
+  Serial.println(betterData.data7);
+  Serial.print("data8: ");
+  Serial.println(betterData.data8);
+  Serial.print("data9: ");
+  Serial.println(betterData.data9);
+  Serial.print("data10: ");
+  Serial.println(betterData.data10);
+  
+  Serial.print("Message Number: ");
+  Serial.println(betterData.message_number);
+  Serial.println();
+  
+  Serial.print("SIZE OF MESSAGE: ");
+  Serial.println(sizeof(betterData));
   Serial.println();
 
 }
