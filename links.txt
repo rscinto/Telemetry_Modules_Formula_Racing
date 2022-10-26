@@ -1,0 +1,11 @@
+https://icircuit.net/arduino-esp32-hardware-serial2-example/3181
+
+
+https://microcontrollerslab.com/esp32-uart-communication-pins-example/
+
+
+https://learn.sparkfun.com/tutorials/sending-sensor-data-over-wifi/all
+
+http://www.iotsharing.com/2017/09/how-to-use-arduino-esp32-can-interface.html?m=1
+
+https://community.home-assistant.io/t/how-to-add-an-external-antenna-to-an-esp-board/131601
