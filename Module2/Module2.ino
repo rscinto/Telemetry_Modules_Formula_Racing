@@ -101,38 +101,14 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 */
 
 // callback function that will be executed when data is received
-void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
+void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) 
+{
   memcpy(&betterData, incomingData, sizeof(betterData));
 
   // Use this for testing in Serial Monitor if you're not seeing anything on the LCD display 
-  
-  Serial.print("data1: ");
-  Serial.println(betterData.data1);
-  Serial.print("data2: ");
-  Serial.println(betterData.data2);
-  Serial.print("data3: ");
-  Serial.println(betterData.data3);
-  Serial.print("data4: ");
-  Serial.println(betterData.data4);
-  Serial.print("data5: ");
-  Serial.println(betterData.data5);
-  Serial.print("data6: ");
-  Serial.println(betterData.data6);
-  Serial.print("data7: ");
-  Serial.println(betterData.data7);
-  Serial.print("data8: ");
-  Serial.println(betterData.data8);
-  Serial.print("data9: ");
-  Serial.println(betterData.data9);
-  Serial.print("data10: ");
-  Serial.println(betterData.data10);
-  
-  Serial.print("Message Number: ");
-  Serial.println(betterData.message_number);
-  Serial.println();
-  
-  Serial.print("SIZE OF MESSAGE: ");
-  Serial.println(sizeof(betterData));
+  String message = String(betterdata);
+
+  Serial.println(betterData);
   Serial.println();
 
 }

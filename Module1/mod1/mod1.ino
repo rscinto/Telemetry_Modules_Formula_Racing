@@ -1,33 +1,12 @@
 #include <esp_now.h>
 #include <WiFi.h>
-
-//------------------------------------------------------START CLASS
-class class_message
-{
-  public:
-    int message_number;
-    float data1;
-    float data2;
-    float data3;
-    float data4;
-    float data5;
-    float data6;
-    float data7;
-    float data8;
-    float data9;
-    float data10;
-    class_message(){ message_number++;}
-  
-};
-
-long long int messages_sent = 0;
-
-//------------------------------------------------------END CLASS
+#define RXD2 16
+#define TXD2 17
 
 esp_now_peer_info_t peerInfo;
 
 // REPLACE WITH YOUR RECEIVER MAC Address
-uint8_t broadcastAddress[] = {0x24, 0x6F, 0x28, 0x7A, 0x93, 0x44};
+uint8_t broadcastAddress[] = {0x24, 0x6F, 0x28, 0x79, 0xDE, 0x34};
 
 // callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
@@ -38,6 +17,10 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 void setup() {
 
   Serial.begin(115200);
+  //Serial1.begin(9600, SERIAL_8N1, RXD2, TXD2);
+  Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);
+  Serial.println("Serial Txd is on pin: "+String(TX));
+  Serial.println("Serial Rxd is on pin: "+String(RX));
 
 
   // Set device as a Wi-Fi Station
@@ -65,22 +48,13 @@ void setup() {
 
 void loop() {
   // Set values to send
-  class_message betterData;
-  messages_sent++;
-  betterData.message_number = messages_sent;
 
-  betterData.data1 = 1000;
-  betterData.data2 = 12000;
-  betterData.data3 = 13000;
-  betterData.data4 = 14000;
-  betterData.data5 = 15000;
-  betterData.data6 = 16000;
-  betterData.data7 = 17000;
-  betterData.data8 = 18000;
-  betterData.data9 = 19000;
-  betterData.data10 = 199000;
-
-  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &betterData, sizeof(betterData));
+    while (Serial2.available()) 
+  {
+    String message = String(Serial2.read());
+    Serial.print(message);
+     
+     esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &message, sizeof(message));
 
   if (result == ESP_OK) {
     Serial.println("Sent with success");
@@ -88,5 +62,12 @@ void loop() {
   else {
     Serial.println("Error sending the data");
   }
+  }
+
+  
+
+
+
+
   //delay(2000); // Send data every two seconds
 }
