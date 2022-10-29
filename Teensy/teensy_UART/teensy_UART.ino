@@ -1,17 +1,16 @@
-#include <HardwareSerial.h>
 #define HWSERIAL Serial1
 
 void setup() {
   
-  Serial.begin(9600);
-  HWSERIAL.begin(115200);
+  Serial.begin(115200);
+  HWSERIAL.begin(9600, SERIAL_8N1);
 }
  
 void loop() 
 {
   
-    Serial.print("Sending Test");
+    Serial.println("Sending Test");
     HWSERIAL.print("TEST");
 
-  //delay(5000);
+  delay(500);
 }

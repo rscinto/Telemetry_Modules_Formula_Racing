@@ -1,28 +1,20 @@
-#include <HardwareSerial.h>
 
-//#define RXD2 40
-//#define TXD2 41
+#define RXD2 16
+#define TXD2 17
 
+void setup() {
+  // Note the format for setting a serial port is 
+  //as follows: Serial2.begin(baud-rate, protocol, RX pin, TX pin);
+  Serial.begin(115200);
+  //Serial1.begin(9600, SERIAL_8N1, RXD2, TXD2);
+  Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);
+  Serial.println("Serial Txd is on pin: "+String(TX));
+  Serial.println("Serial Rxd is on pin: "+String(RX));
+}
 
-   
- void setup() 
- {
-  // Initialize "debug" serial port
-  // The data rate must be much higher than the "link" serial port
-  Serial.begin(9600);
-
-  // Initialize the "link" serial port
-  // Use a low data rate to reduce the error ratio
-  Serial1.begin(115200);
- }
-
- 
- void loop() 
- {
-  
-  if(Serial1.available())
-  {
-     Serial.write(Serial1.read());  
+void loop() 
+{ //Choose Serial1 or Serial2 as required
+  while (Serial2.available()) {
+    Serial.print(char(Serial2.read()));
   }
-
- }
+}
