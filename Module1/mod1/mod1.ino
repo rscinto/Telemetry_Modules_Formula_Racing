@@ -19,8 +19,8 @@ void setup() {
   Serial.begin(115200);
   //Serial1.begin(9600, SERIAL_8N1, RXD2, TXD2);
   Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);
-  Serial.println("Serial Txd is on pin: "+String(TX));
-  Serial.println("Serial Rxd is on pin: "+String(RX));
+  Serial.println("Serial Txd is on pin: "+String(TXD2));
+  Serial.println("Serial Rxd is on pin: "+String(RXD2));
 
 
   // Set device as a Wi-Fi Station
