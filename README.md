@@ -6,7 +6,7 @@ CAN ==> TEENSY ==UART==> ESP32 ==WIFI==> ESP32 ==MAGIC==> Laptop (Sweet data gra
 ### See Issues for the current to do list
 ### Most up to date working code is in "Working Modules"
 
-##How it works
+## How it works
 Great explanation
 
 
