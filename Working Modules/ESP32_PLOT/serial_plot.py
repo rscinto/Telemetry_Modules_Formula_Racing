@@ -61,7 +61,7 @@ class serialPlot:
     print('Disconnected')
 
 def main():
-  portName = '/dev/ttyS3'
+  portName = 'COM4'
   baudRate = 38400
   maxPlotLength = 100
   dataNumBytes = 4  # number of bytes of 1 data point, Arduino float = 4 bytes
@@ -71,7 +71,7 @@ def main():
   # plotting starts below
   pltInterval = 50    # Period at which the plot animation updates [ms]
   xmin, xmax = (0, maxPlotLength)
-  ymin, ymax = (-5, 5)
+  ymin, ymax = (25, 175)
   fig = plt.figure()
   ax = plt.axes(xlim=(xmin, xmax), ylim=(float(ymin - (ymax - ymin) / 10), float(ymax + (ymax - ymin) / 10)))  # extra range for y values
   ax.set_title('ESP32 + MPU 6050 Read')
