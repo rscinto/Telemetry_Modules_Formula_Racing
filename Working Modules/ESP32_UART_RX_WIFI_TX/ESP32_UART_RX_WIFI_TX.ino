@@ -98,8 +98,5 @@ void loop() {
 
   
 
-
-
-
   //delay(2000); // Send data every two seconds
 }
