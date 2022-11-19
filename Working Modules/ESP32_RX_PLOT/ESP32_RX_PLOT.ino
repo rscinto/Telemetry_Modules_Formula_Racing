@@ -1,25 +1,6 @@
 #include "esp_now.h"
 #include <WiFi.h>
 
-class class_message
-{
-  public:
-    static int message_number;
-    float data1;
-    float data2;
-    float data3;
-    float data4;
-    float data5;
-    float data6;
-    float data7;
-    float data8;
-    float data9;
-    float data10;
-    class_message(){ message_number++;}
-  
-};
-
-
 unsigned long timer = 0;
 long loopTime = 50000;   // microseconds
 
@@ -38,19 +19,13 @@ void setup() {
   // Once ESPNow is successfully Init, we will register for recv CB to
   // get recv packer info
   esp_now_register_recv_cb(OnDataRecv);
-
-  //WiFi.mode(WIFI_STA);
-  //Serial.print("The MAC address for this board is: ");
-  //Serial.println(WiFi.macAddress());
 }
 
 void loop() 
 {
   timeSync(loopTime);
 
-  float val = 10.0;
-  //sendToPC(&val);
-
+  //Print to check if MAC Address changes
   //WiFi.mode(WIFI_STA);
   //Serial.print("The MAC address for this board is: ");
   //Serial.println(WiFi.macAddress());
@@ -99,6 +74,11 @@ void timeSync(unsigned long deltaT)
   }
   timer = currTime + timeToDelay;
 }
+
+
+
+
+
 
 void sendToPC(float* data)
 {
