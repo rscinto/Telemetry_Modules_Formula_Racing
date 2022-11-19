@@ -15,7 +15,7 @@ Great explanation
 ![alt text](Modules.jpg "Modules")
 
 
-![alt text](ESP32 RX plot.PNG "Modules")
+![alt text]("ESP32 RX plot.PNG" "Modules")
 
 
 
