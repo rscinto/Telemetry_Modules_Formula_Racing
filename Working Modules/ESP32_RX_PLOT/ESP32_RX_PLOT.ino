@@ -31,7 +31,7 @@ void setup() {
     WiFi.mode(WIFI_STA);
     // Init ESP-NOW
     if (esp_now_init() != ESP_OK) {
-    Serial.println("Error initializing ESP-NOW");
+    //Serial.println("Error initializing ESP-NOW");
     return;
   }
 
@@ -39,9 +39,9 @@ void setup() {
   // get recv packer info
   esp_now_register_recv_cb(OnDataRecv);
 
-  WiFi.mode(WIFI_STA);
-  Serial.print("The MAC address for this board is: ");
-  Serial.println(WiFi.macAddress());
+  //WiFi.mode(WIFI_STA);
+  //Serial.print("The MAC address for this board is: ");
+  //Serial.println(WiFi.macAddress());
 }
 
 void loop() 
@@ -50,6 +50,10 @@ void loop()
 
   float val = 10.0;
   //sendToPC(&val);
+
+  //WiFi.mode(WIFI_STA);
+  //Serial.print("The MAC address for this board is: ");
+  //Serial.println(WiFi.macAddress());
 }
 
 
@@ -61,9 +65,11 @@ void loop()
 // callback function that will be executed when data is received
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) 
 {
+  //Serial.println("I got a message");
   float number;
   memcpy(&number, incomingData, sizeof(number));
   sendToPC(&number);
+  //Serial.println(number);
 
   // Use this for testing in Serial Monitor if you're not seeing anything on the LCD display 
 }

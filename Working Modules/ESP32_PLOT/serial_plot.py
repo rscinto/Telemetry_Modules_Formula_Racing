@@ -61,7 +61,7 @@ class serialPlot:
     print('Disconnected')
 
 def main():
-  portName = 'COM4'
+  portName = 'COM9'
   baudRate = 38400
   maxPlotLength = 100
   dataNumBytes = 4  # number of bytes of 1 data point, Arduino float = 4 bytes

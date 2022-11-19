@@ -26,7 +26,8 @@ class class_message
 esp_now_peer_info_t peerInfo;
 
 // REPLACE WITH YOUR RECEIVER MAC Address
-uint8_t broadcastAddress[] = {0x24, 0x6F, 0x28, 0x79, 0xDE, 0x34};
+uint8_t broadcastAddress[] = {0x24, 0x0A, 0xC4, 0x61, 0x4F, 0x44};
+//24:0A:C4:61:4F:44
 
 // callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {

@@ -35,6 +35,7 @@ void loop()
     float* sender = &modulator;
     byte* byteData = (byte*)(sender);
     HWSERIAL.write(byteData, 4);
+    Serial.println(modulator);
     delay(50);
   }
     //Serial.println("Sending Test");
