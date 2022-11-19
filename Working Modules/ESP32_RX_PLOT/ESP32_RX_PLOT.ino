@@ -50,9 +50,11 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len)
 }
 
 
-
-
-
+void sendToPC(float* data)
+{
+  byte* byteData = (byte*)(data);
+  Serial.write(byteData, 4);
+}
 
 
 void timeSync(unsigned long deltaT)
@@ -73,15 +75,4 @@ void timeSync(unsigned long deltaT)
       // timeToDelay is negative so we start immediately
   }
   timer = currTime + timeToDelay;
-}
-
-
-
-
-
-
-void sendToPC(float* data)
-{
-  byte* byteData = (byte*)(data);
-  Serial.write(byteData, 4);
 }
