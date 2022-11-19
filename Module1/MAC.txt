@@ -1,2 +1,0 @@
-MOD 1 (Sender) :    FC:F5:C4:0C:06:EC
-MOD 2 (Receiver):    24:6F:28:7A:93:44

@@ -3,11 +3,31 @@
 #define RXD2 16
 #define TXD2 17
 
+class class_message
+{
+  public:
+    static int message_number;
+    float data1;
+    float data2;
+    float data3;
+    float data4;
+    float data5;
+    float data6;
+    float data7;
+    float data8;
+    float data9;
+    float data10;
+    class_message(){ message_number++;}
+  
+};
+
+
 //must be global
 esp_now_peer_info_t peerInfo;
 
 // REPLACE WITH YOUR RECEIVER MAC Address
-uint8_t broadcastAddress[] = {0x24, 0x6F, 0x28, 0x79, 0xDE, 0x34};
+uint8_t broadcastAddress[] = {0x24, 0x0A, 0xC4, 0x61, 0x4F, 0x44};
+//24:0A:C4:61:4F:44
 
 // callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
@@ -49,13 +69,26 @@ void setup() {
 void loop() {
   // Set values to send
 
+ int numChars = 4;
+ uint8_t receivedChars[numChars];
+      
   while (Serial2.available()) 
   {
-    String message = String(Serial2.read());
-    Serial.print(message);
-       
-    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &message, sizeof(message));
+    Serial2.readBytes(receivedChars, numChars);
+    //float i = float(Serial2.read());
+    //byte* byteData = (byte*)(&i);
+
+  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) receivedChars, sizeof(receivedChars));
   
+
+  //Serial.println(i);
+  //uint8_t bytes[4] = receivedChars; // fill this array with the four bytes you received
+  //static_assert(sizeof(float) == 4, "float size is expected to be 4 bytes");
+  float f;
+  memcpy (&f, receivedChars, 4);
+  Serial.println(f);
+  
+
     if (result == ESP_OK) {
       Serial.println("Sent with success");
     }
@@ -65,9 +98,6 @@ void loop() {
   }
 
   
-
-
-
 
   //delay(2000); // Send data every two seconds
 }
